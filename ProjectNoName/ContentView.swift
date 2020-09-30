@@ -6,11 +6,45 @@
 //
 
 import SwiftUI
+import Combine
+
+struct User: Decodable {
+    let name: String
+}
+
+class UserClient: ObservableObject {
+    
+    @Published var user: User?
+    
+    private var cancellable: AnyCancellable?
+    
+    init() {
+        let networkManager = NetworkManager()
+        let request: AnyPublisher<User, APIRequestError> = networkManager.request()
+        cancellable = request
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { (completion) in
+                print("Completion \(completion)")
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    print("Finished")
+                }
+            }, receiveValue: { (user) in
+                self.user = user
+            })
+    }
+}
 
 struct ContentView: View {
+    
+    @ObservedObject var userClient = UserClient()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            Text(userClient.user?.name ?? "")
+        }
     }
 }
 
