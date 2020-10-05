@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F049A5542521F2B700F8BBF8"
-               BuildableName = "ProjectNoName.app"
-               BlueprintName = "ProjectNoName"
-               ReferencedContainer = "container:ProjectNoName.xcodeproj">
+               BuildableName = "NetworkLayerWithCombine.app"
+               BlueprintName = "NetworkLayerWithCombine"
+               ReferencedContainer = "container:NetworkLayerWithCombine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F049A5652521F2B900F8BBF8"
-               BuildableName = "ProjectNoNameTests.xctest"
-               BlueprintName = "ProjectNoNameTests"
-               ReferencedContainer = "container:ProjectNoName.xcodeproj">
+               BuildableName = "NetworkLayerWithCombineTests.xctest"
+               BlueprintName = "NetworkLayerWithCombineTests"
+               ReferencedContainer = "container:NetworkLayerWithCombine.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F049A5702521F2B900F8BBF8"
-               BuildableName = "ProjectNoNameUITests.xctest"
-               BlueprintName = "ProjectNoNameUITests"
-               ReferencedContainer = "container:ProjectNoName.xcodeproj">
+               BuildableName = "NetworkLayerWithCombineUITests.xctest"
+               BlueprintName = "NetworkLayerWithCombineUITests"
+               ReferencedContainer = "container:NetworkLayerWithCombine.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F049A5542521F2B700F8BBF8"
-            BuildableName = "ProjectNoName.app"
-            BlueprintName = "ProjectNoName"
-            ReferencedContainer = "container:ProjectNoName.xcodeproj">
+            BuildableName = "NetworkLayerWithCombine.app"
+            BlueprintName = "NetworkLayerWithCombine"
+            ReferencedContainer = "container:NetworkLayerWithCombine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F049A5542521F2B700F8BBF8"
-            BuildableName = "ProjectNoName.app"
-            BlueprintName = "ProjectNoName"
-            ReferencedContainer = "container:ProjectNoName.xcodeproj">
+            BuildableName = "NetworkLayerWithCombine.app"
+            BlueprintName = "NetworkLayerWithCombine"
+            ReferencedContainer = "container:NetworkLayerWithCombine.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

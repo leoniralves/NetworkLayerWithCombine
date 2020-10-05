@@ -1,5 +1,5 @@
 //
-//  ProjectNoNameApp.swift
+//  NetworkLayerWithCombine.swift
 //  ProjectNoName
 //
 //  Created by Leonir Alves Deolindo on 28/09/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ProjectNoNameApp: App {
+struct NetworkLayerWithCombine: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
