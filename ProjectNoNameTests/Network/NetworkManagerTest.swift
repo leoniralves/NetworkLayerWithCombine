@@ -15,6 +15,15 @@ class NetworkManagerTest: XCTestCase {
         let name: String
     }
     
+    enum ServiceTargetDummy: APIServiceTarget {
+        case dummy
+    
+        var path: String { "" }
+        var method: HTTPMethod { .GET }
+        var header: [String : String]? { nil }
+        var parameters: [String : String]? { nil }
+    }
+    
     func test_request_withValidJsonAndRequestSuccess_shouldParseJsonSuccess() {
         let expectation = XCTestExpectation(description: "Request and parse json with success")
         
@@ -22,7 +31,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 200),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -46,7 +55,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 400),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -69,7 +78,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 401),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -92,7 +101,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 403),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -115,7 +124,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 404),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -138,7 +147,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 408),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -161,7 +170,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 407),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -184,7 +193,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 500),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -207,12 +216,12 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 600),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
             case .failure(let error):
-                guard case let APIRequestError.service(.unknown(description)) = error else {
+                guard case let APIError.service(.unknown(description)) = error else {
                     XCTFail("Error: description not found")
                     return
                 }
@@ -233,7 +242,7 @@ class NetworkManagerTest: XCTestCase {
         
         let sessionMock = SessionMock(stub: nil, urlError: URLError(.cancelled))
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -254,7 +263,7 @@ class NetworkManagerTest: XCTestCase {
         
         let sessionMock = SessionMock(stub: nil, urlError: URLError(.networkConnectionLost))
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -275,7 +284,7 @@ class NetworkManagerTest: XCTestCase {
         
         let sessionMock = SessionMock(stub: nil, urlError: URLError(.badURL))
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -296,7 +305,7 @@ class NetworkManagerTest: XCTestCase {
         
         let sessionMock = SessionMock(stub: nil, urlError: URLError(.timedOut))
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -317,7 +326,7 @@ class NetworkManagerTest: XCTestCase {
         
         let sessionMock = SessionMock(stub: nil, urlError: URLError(.unknown))
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -340,7 +349,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 200),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -364,7 +373,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 200),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -388,7 +397,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 200),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {
@@ -412,7 +421,7 @@ class NetworkManagerTest: XCTestCase {
                                              statusCode: 200),
                                       urlError: nil)
         let networkManager = NetworkManager(session: sessionMock)
-        let publisher: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let publisher: AnyPublisher<User, APIError> = networkManager.request(for: ServiceTargetDummy.dummy)
         
         let cancellable = publisher.sink { (completion) in
             switch completion {

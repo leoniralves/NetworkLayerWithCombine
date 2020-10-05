@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F0380D8B252491C20068209B /* APIRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D8A252491C20068209B /* APIRequestProtocol.swift */; };
-		F0380D90252491E40068209B /* APIRequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D8F252491E40068209B /* APIRequestError.swift */; };
+		F0380D8B252491C20068209B /* APISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D8A252491C20068209B /* APISession.swift */; };
+		F0380D90252491E40068209B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D8F252491E40068209B /* APIError.swift */; };
 		F0380D9825249FF50068209B /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D9725249FF50068209B /* SessionMock.swift */; };
 		F049A5592521F2B700F8BBF8 /* ProjectNoNameApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049A5582521F2B700F8BBF8 /* ProjectNoNameApp.swift */; };
 		F049A55B2521F2B700F8BBF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F049A55A2521F2B700F8BBF8 /* ContentView.swift */; };
@@ -42,8 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F0380D8A252491C20068209B /* APIRequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestProtocol.swift; sourceTree = "<group>"; };
-		F0380D8F252491E40068209B /* APIRequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestError.swift; sourceTree = "<group>"; };
+		F0380D8A252491C20068209B /* APISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISession.swift; sourceTree = "<group>"; };
+		F0380D8F252491E40068209B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		F0380D9725249FF50068209B /* SessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
 		F049A5552521F2B700F8BBF8 /* ProjectNoName.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectNoName.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F049A5582521F2B700F8BBF8 /* ProjectNoNameApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNoNameApp.swift; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				F049A587252209B000F8BBF8 /* NetworkManager.swift */,
-				F0380D8A252491C20068209B /* APIRequestProtocol.swift */,
-				F0380D8F252491E40068209B /* APIRequestError.swift */,
+				F0380D8A252491C20068209B /* APISession.swift */,
+				F0380D8F252491E40068209B /* APIError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -323,9 +323,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F0380D8B252491C20068209B /* APIRequestProtocol.swift in Sources */,
+				F0380D8B252491C20068209B /* APISession.swift in Sources */,
 				F049A588252209B000F8BBF8 /* NetworkManager.swift in Sources */,
-				F0380D90252491E40068209B /* APIRequestError.swift in Sources */,
+				F0380D90252491E40068209B /* APIError.swift in Sources */,
 				F049A55B2521F2B700F8BBF8 /* ContentView.swift in Sources */,
 				F049A5592521F2B700F8BBF8 /* ProjectNoNameApp.swift in Sources */,
 			);

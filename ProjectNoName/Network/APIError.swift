@@ -1,5 +1,5 @@
 //
-//  APIRequestError.swift
+//  APIError.swift
 //  ProjectNoName
 //
 //  Created by Leonir Alves Deolindo on 30/09/20.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum APIRequestError: Error, Equatable {
+enum APIError: Error, Equatable {
     case service(Service)
     case network(Network)
     case parse(Parse)
@@ -42,7 +42,7 @@ enum APIRequestError: Error, Equatable {
     case unknown
 }
 
-extension APIRequestError {
+extension APIError {
     init(_ error: HTTPURLResponse) {
         self = .service(Service(error))
     }
@@ -56,7 +56,7 @@ extension APIRequestError {
     }
 }
 
-extension APIRequestError.Service {
+extension APIError.Service {
     init(_ httpURLResponse: HTTPURLResponse) {
         switch httpURLResponse.statusCode {
         case 400: self = .badRequest
@@ -71,7 +71,7 @@ extension APIRequestError.Service {
     }
 }
 
-extension APIRequestError.Network {
+extension APIError.Network {
     init(_ urlError: URLError) {
         switch urlError.code {
         case .cancelled: self = .cancelled
@@ -83,7 +83,7 @@ extension APIRequestError.Network {
     }
 }
 
-extension APIRequestError.Parse {
+extension APIError.Parse {
     init(_ decodingError: DecodingError) {
         switch decodingError {
         case let .typeMismatch( _, context): self = .typeMismatch(debugDescription: context.debugDescription)

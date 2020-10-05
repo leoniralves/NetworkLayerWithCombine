@@ -9,8 +9,7 @@ import XCTest
 import Combine
 @testable import ProjectNoName
 
-class SessionMock: APIRequestProtocol {
-    
+class SessionMock: APISession {
     private let stub: (file: String, statusCode: Int)?
     private let urlError: URLError?
     
@@ -20,7 +19,7 @@ class SessionMock: APIRequestProtocol {
         self.urlError = urlError
     }
     
-    func request(for url: URL) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure> {
+    func request(for request: URLRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, URLSession.DataTaskPublisher.Failure> {
         if let response = makeResponse() {
             return Result.success(response)
                 .publisher

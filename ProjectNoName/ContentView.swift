@@ -12,6 +12,26 @@ struct User: Decodable {
     let name: String
 }
 
+enum UserTarget: APIServiceTarget {
+    case user
+    
+    var path: String {
+        "/user"
+    }
+    
+    var method: HTTPMethod {
+        .GET
+    }
+    
+    var header: [String : String]? {
+        nil
+    }
+    
+    var parameters: [String : String]? {
+        nil
+    }
+}
+
 class UserClient: ObservableObject {
     
     @Published var user: User?
@@ -19,8 +39,11 @@ class UserClient: ObservableObject {
     private var cancellable: AnyCancellable?
     
     init() {
+        
+        let userTarget = UserTarget.user
+        
         let networkManager = NetworkManager()
-        let request: AnyPublisher<User, APIRequestError> = networkManager.request()
+        let request: AnyPublisher<User, APIError> = networkManager.request(for: userTarget)
         cancellable = request
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { (completion) in
