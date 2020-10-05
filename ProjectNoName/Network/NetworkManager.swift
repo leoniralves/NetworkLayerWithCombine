@@ -8,18 +8,6 @@
 import Foundation
 import Combine
 
-enum HTTPMethod: String {
-    case POST
-    case GET
-}
-
-protocol APIServiceTarget {
-    var path: String { get }
-    var method: HTTPMethod { get }
-    var header: [String: String]? { get }
-    var parameters: [String: String]? { get }
-}
-
 class NetworkManager {
     
     private let session: APISession
