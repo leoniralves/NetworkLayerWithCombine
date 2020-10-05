@@ -29,7 +29,7 @@ class NetworkManager {
     }
     
     func request<T: Decodable>(for target: APIServiceTarget) -> AnyPublisher<T, APIError> {
-        guard let url = URL(string: "http://127.0.0.1:4000")?.appendingPathComponent(target.path) else {
+        guard let url = URL(string: API.baseURL)?.appendingPathComponent(target.path) else {
             return Result<T, APIError>
                 .Publisher(.network(.badURL))
                 .eraseToAnyPublisher()
