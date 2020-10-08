@@ -8,6 +8,8 @@
 import Foundation
 import Combine
 
+typealias JSON = [String: Any]
+
 class NetworkManager {
     
     private let session: APISession
@@ -17,29 +19,7 @@ class NetworkManager {
     }
     
     func request<T: Decodable>(for target: APIServiceTarget) -> AnyPublisher<T, APIError> {
-        guard let url = URL(string: API.baseURL)?.appendingPathComponent(target.path) else {
-            return Result<T, APIError>
-                .Publisher(.network(.badURL))
-                .eraseToAnyPublisher()
-        }
-        
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            return Result<T, APIError>
-                .Publisher(.network(.badURL))
-                .eraseToAnyPublisher()
-        }
-        
-        urlComponents.queryItems = target.parameters?.map { URLQueryItem(name: $0.key, value: $0.value) }
-        
-        guard let urlFromComponents = urlComponents.url else {
-            return Result<T, APIError>
-                .Publisher(.network(.badURL))
-                .eraseToAnyPublisher()
-        }
-        
-        var request = URLRequest(url: urlFromComponents)
-        request.httpMethod = target.method.rawValue
-        request.allHTTPHeaderFields = target.header
+        let request = URLRequest(baseUrl: API.baseURL, target: target)
         
         return session.request(for: request)
             .tryMap{
