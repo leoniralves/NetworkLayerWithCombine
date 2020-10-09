@@ -10,11 +10,24 @@ import Combine
 
 struct ContentView: View {
     
-    @ObservedObject var userViewModel = UserViewModel()
+    @ObservedObject var moviesViewModel = MoviesViewModel()
     
     var body: some View {
-        VStack {
-            Text(userViewModel.user?.name ?? "")
+        List {
+            if let movies = moviesViewModel.movies {
+                ForEach(movies, id: \.id) { movie in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("\(movie.title)")
+                                .font(.title2)
+                            
+                            Text("\(movie.overview ?? "")")
+                                .font(.caption)
+                                .padding(.top, 5)
+                        }
+                    }
+                }
+            }
         }
     }
 }

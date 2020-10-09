@@ -22,14 +22,7 @@ class NetworkManager {
         let request = URLRequest(baseUrl: API.baseURL, target: target)
         
         return session.request(for: request)
-            .tryMap{
-                if let response = $0.response as? HTTPURLResponse,
-                   response.statusCode != 200 {
-                    throw APIError(response)
-                } else {
-                    return $0.data
-                }
-            }
+            .tryMap{ $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
             .mapError{ (error) -> APIError in
                 if let _error = error as? APIError {
