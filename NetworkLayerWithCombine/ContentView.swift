@@ -28,6 +28,12 @@ struct ContentView: View {
                     }
                 }
             }
+            
+            if let error = moviesViewModel.error {
+                HStack {
+                    Text("\(error.localizedDescription)")
+                }
+            }
         }
     }
 }

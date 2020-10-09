@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0001A44B2530F926006798F7 /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0001A44A2530F926006798F7 /* MoviesService.swift */; };
 		00ADFDF6252F8A3F0049E1AA /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ADFDF5252F8A3F0049E1AA /* URL+Extensions.swift */; };
 		00ADFDFB252F8ABA0049E1AA /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ADFDFA252F8ABA0049E1AA /* URLRequest+Extensions.swift */; };
 		00ADFE05252F91740049E1AA /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ADFE04252F91740049E1AA /* MoviesViewModel.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0001A44A2530F926006798F7 /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
 		00ADFDF5252F8A3F0049E1AA /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
 		00ADFDFA252F8ABA0049E1AA /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		00ADFE04252F91740049E1AA /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
@@ -102,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0001A4492530F913006798F7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0001A44A2530F926006798F7 /* MoviesService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		00ADFE00252F91200049E1AA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				F049A5862522099000F8BBF8 /* Network */,
+				0001A4492530F913006798F7 /* Services */,
 				00ADFE00252F91200049E1AA /* ViewModel */,
 				F049A5582521F2B700F8BBF8 /* NetworkLayerWithCombineApp.swift */,
 				F049A55A2521F2B700F8BBF8 /* ContentView.swift */,
@@ -351,6 +362,7 @@
 			files = (
 				F0380D8B252491C20068209B /* APISession.swift in Sources */,
 				F049A588252209B000F8BBF8 /* NetworkManager.swift in Sources */,
+				0001A44B2530F926006798F7 /* MoviesService.swift in Sources */,
 				F0380D90252491E40068209B /* APIError.swift in Sources */,
 				00ADFDFB252F8ABA0049E1AA /* URLRequest+Extensions.swift in Sources */,
 				F049A55B2521F2B700F8BBF8 /* ContentView.swift in Sources */,

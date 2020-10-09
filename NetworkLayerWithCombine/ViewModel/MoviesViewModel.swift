@@ -41,56 +41,28 @@ struct Movie: Codable {
 
 class MoviesViewModel: ObservableObject {
     @Published var movies: [Movie]?
+    @Published var error: APIError?
     
-    private var cancellable: AnyCancellable?
+    private var moviesSubscriber: AnyCancellable?
     
-    init() {
-        getMovies()
+    private var service: MoviesService
+    
+    init(service: MoviesService = MoviesService()) {
+        self.service = service
+        
+       fetchUpcomingMovies()
     }
-}
-
-extension MoviesViewModel {
-    func getMovies() {
-        let userTarget = MovieTarget.movie
-        
-        let networkManager = NetworkManager()
-        let request: AnyPublisher<Movies, APIError> = networkManager.request(for: userTarget)
-        
-        cancellable = request
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { (completion) in
-                print("Completion \(completion)")
-                switch completion {
-                case .failure(let error):
-                    print(error)
-                case .finished:
-                    print("Finished")
+    
+    private func fetchUpcomingMovies() {
+        moviesSubscriber = self.service.fetchMovies()
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                if case Subscribers.Completion.failure(let error) = completion {
+                    self.error = error
                 }
-            }, receiveValue: { (movies) in
-                self.movies = movies.results
-            })
-    }
-}
-
-extension MoviesViewModel {
-    enum MovieTarget: APIServiceTarget {
-        case movie
+            } receiveValue: { movies in
+                self.movies = movies
+            }
         
-        var path: String {
-            "movie/upcoming"
-        }
-        
-        var method: HTTPMethod {
-            .GET
-        }
-        
-        var header: [String : String]? {
-            nil
-        }
-        
-        #warning("Adicionar chave do MovieDB")
-        var parameters: [String : String]? {
-            ["api_key": ""]
-        }
     }
 }
