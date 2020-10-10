@@ -27,6 +27,9 @@ struct ContentView: View {
                         }
                     }
                 }
+            } else {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
             }
             
             if let error = moviesViewModel.error {

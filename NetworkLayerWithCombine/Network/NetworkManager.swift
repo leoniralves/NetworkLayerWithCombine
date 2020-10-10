@@ -22,16 +22,34 @@ class NetworkManager {
         let request = URLRequest(baseUrl: API.baseURL, target: target)
         
         return session.request(for: request)
-            .tryMap{
+            .getData(T.self)
+            .mapApiError()
+            .eraseToAnyPublisher()
+    }
+}
+
+typealias DataTypeResult = (data: Data, response: URLResponse)
+
+extension Publisher where Output == DataTypeResult {
+    func getData<T: Decodable>(_ type: T.Type) -> AnyPublisher<T, Error> {
+        return self
+            .tryMap {
                 if let response = $0.response as? HTTPURLResponse,
-                      !(200...300).contains(response.statusCode) {
+                   !(200...300).contains(response.statusCode) {
                     throw APIError(response)
                 }
                 
                 return $0.data
             }
             .decode(type: T.self, decoder: JSONDecoder())
-            .mapError{ (error) -> APIError in
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Failure == Error {
+    func mapApiError() -> AnyPublisher<Output, APIError> {
+        return self
+            .mapError { error -> APIError in
                 if let _error = error as? APIError {
                     return _error
                 }
