@@ -24,7 +24,7 @@ class NetworkManager {
         return session.request(for: request)
             .tryMap{
                 if let response = $0.response as? HTTPURLResponse,
-                      (200...300).contains(response.statusCode) {
+                      !(200...300).contains(response.statusCode) {
                     throw APIError(response)
                 }
                 
