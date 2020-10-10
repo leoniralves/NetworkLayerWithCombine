@@ -9,6 +9,7 @@ import Foundation
 import Combine
 
 typealias JSON = [String: Any]
+typealias DataTypeResult = (data: Data, response: URLResponse)
 
 class NetworkManager {
     
@@ -27,8 +28,6 @@ class NetworkManager {
             .eraseToAnyPublisher()
     }
 }
-
-typealias DataTypeResult = (data: Data, response: URLResponse)
 
 extension Publisher where Output == DataTypeResult {
     func getData<T: Decodable>(_ type: T.Type) -> AnyPublisher<T, Error> {
