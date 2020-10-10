@@ -8,6 +8,9 @@
 import Foundation
 import Combine
 
+typealias JSON = [String: Any]
+typealias DataTypeResult = (data: Data, response: URLResponse)
+
 class NetworkManager {
     
     private let session: APISession
@@ -17,41 +20,35 @@ class NetworkManager {
     }
     
     func request<T: Decodable>(for target: APIServiceTarget) -> AnyPublisher<T, APIError> {
-        guard let url = URL(string: API.baseURL)?.appendingPathComponent(target.path) else {
-            return Result<T, APIError>
-                .Publisher(.network(.badURL))
-                .eraseToAnyPublisher()
-        }
-        
-        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
-            return Result<T, APIError>
-                .Publisher(.network(.badURL))
-                .eraseToAnyPublisher()
-        }
-        
-        urlComponents.queryItems = target.parameters?.map { URLQueryItem(name: $0.key, value: $0.value) }
-        
-        guard let urlFromComponents = urlComponents.url else {
-            return Result<T, APIError>
-                .Publisher(.network(.badURL))
-                .eraseToAnyPublisher()
-        }
-        
-        var request = URLRequest(url: urlFromComponents)
-        request.httpMethod = target.method.rawValue
-        request.allHTTPHeaderFields = target.header
+        let request = URLRequest(baseUrl: API.baseURL, target: target)
         
         return session.request(for: request)
-            .tryMap{
+            .getData(T.self)
+            .mapApiError()
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Output == DataTypeResult {
+    func getData<T: Decodable>(_ type: T.Type) -> AnyPublisher<T, Error> {
+        return self
+            .tryMap {
                 if let response = $0.response as? HTTPURLResponse,
-                   response.statusCode != 200 {
+                   !(200...300).contains(response.statusCode) {
                     throw APIError(response)
-                } else {
-                    return $0.data
                 }
+                
+                return $0.data
             }
             .decode(type: T.self, decoder: JSONDecoder())
-            .mapError{ (error) -> APIError in
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Failure == Error {
+    func mapApiError() -> AnyPublisher<Output, APIError> {
+        return self
+            .mapError { error -> APIError in
                 if let _error = error as? APIError {
                     return _error
                 }

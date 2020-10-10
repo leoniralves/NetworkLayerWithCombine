@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0001A44B2530F926006798F7 /* MoviesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0001A44A2530F926006798F7 /* MoviesService.swift */; };
+		00ADFDF6252F8A3F0049E1AA /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ADFDF5252F8A3F0049E1AA /* URL+Extensions.swift */; };
+		00ADFDFB252F8ABA0049E1AA /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ADFDFA252F8ABA0049E1AA /* URLRequest+Extensions.swift */; };
+		00ADFE05252F91740049E1AA /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00ADFE04252F91740049E1AA /* MoviesViewModel.swift */; };
 		F0380D8B252491C20068209B /* APISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D8A252491C20068209B /* APISession.swift */; };
 		F0380D90252491E40068209B /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D8F252491E40068209B /* APIError.swift */; };
 		F0380D9825249FF50068209B /* SessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0380D9725249FF50068209B /* SessionMock.swift */; };
@@ -45,6 +49,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0001A44A2530F926006798F7 /* MoviesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesService.swift; sourceTree = "<group>"; };
+		00ADFDF5252F8A3F0049E1AA /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
+		00ADFDFA252F8ABA0049E1AA /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		00ADFE04252F91740049E1AA /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		F0380D8A252491C20068209B /* APISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISession.swift; sourceTree = "<group>"; };
 		F0380D8F252491E40068209B /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		F0380D9725249FF50068209B /* SessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionMock.swift; sourceTree = "<group>"; };
@@ -96,6 +104,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0001A4492530F913006798F7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0001A44A2530F926006798F7 /* MoviesService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		00ADFE00252F91200049E1AA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				00ADFE04252F91740049E1AA /* MoviesViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F0380D9425249FCB0068209B /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				F049A5862522099000F8BBF8 /* Network */,
+				0001A4492530F913006798F7 /* Services */,
+				00ADFE00252F91200049E1AA /* ViewModel */,
 				F049A5582521F2B700F8BBF8 /* NetworkLayerWithCombineApp.swift */,
 				F049A55A2521F2B700F8BBF8 /* ContentView.swift */,
 				F049A55C2521F2B800F8BBF8 /* Assets.xcassets */,
@@ -194,6 +220,8 @@
 				F076294E252B522E0043F170 /* HTTPMethod.swift */,
 				F0380D8F252491E40068209B /* APIError.swift */,
 				F0762944252B50920043F170 /* API.swift */,
+				00ADFDF5252F8A3F0049E1AA /* URL+Extensions.swift */,
+				00ADFDFA252F8ABA0049E1AA /* URLRequest+Extensions.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -334,8 +362,12 @@
 			files = (
 				F0380D8B252491C20068209B /* APISession.swift in Sources */,
 				F049A588252209B000F8BBF8 /* NetworkManager.swift in Sources */,
+				0001A44B2530F926006798F7 /* MoviesService.swift in Sources */,
 				F0380D90252491E40068209B /* APIError.swift in Sources */,
+				00ADFDFB252F8ABA0049E1AA /* URLRequest+Extensions.swift in Sources */,
 				F049A55B2521F2B700F8BBF8 /* ContentView.swift in Sources */,
+				00ADFDF6252F8A3F0049E1AA /* URL+Extensions.swift in Sources */,
+				00ADFE05252F91740049E1AA /* MoviesViewModel.swift in Sources */,
 				F076294F252B522E0043F170 /* HTTPMethod.swift in Sources */,
 				F0762945252B50920043F170 /* API.swift in Sources */,
 				F076294A252B51F50043F170 /* APIServiceTarget.swift in Sources */,

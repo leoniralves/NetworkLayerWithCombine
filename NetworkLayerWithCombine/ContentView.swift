@@ -8,65 +8,35 @@
 import SwiftUI
 import Combine
 
-struct User: Decodable {
-    let name: String
-}
-
-enum UserTarget: APIServiceTarget {
-    case user
-    
-    var path: String {
-        "/user"
-    }
-    
-    var method: HTTPMethod {
-        .GET
-    }
-    
-    var header: [String : String]? {
-        nil
-    }
-    
-    var parameters: [String : String]? {
-        nil
-    }
-}
-
-class UserClient: ObservableObject {
-    
-    @Published var user: User?
-    
-    private var cancellable: AnyCancellable?
-    
-    init() {
-        
-        let userTarget = UserTarget.user
-        
-        let networkManager = NetworkManager()
-        let request: AnyPublisher<User, APIError> = networkManager.request(for: userTarget)
-        cancellable = request
-            .receive(on: DispatchQueue.main)
-            .sink(receiveCompletion: { (completion) in
-                print("Completion \(completion)")
-                switch completion {
-                case .failure(let error):
-                    print(error)
-                case .finished:
-                    print("Finished")
-                }
-            }, receiveValue: { (user) in
-                self.user = user
-            })
-    }
-}
-
 struct ContentView: View {
     
-    @ObservedObject var userClient = UserClient()
+    @ObservedObject var moviesViewModel = MoviesViewModel()
     
     var body: some View {
-        VStack {
-            Text(userClient.user?.name ?? "")
+        List {
+            if let movies = moviesViewModel.movies {
+                ForEach(movies, id: \.id) { movie in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("\(movie.title)")
+                                .font(.title2)
+                            
+                            Text("\(movie.overview ?? "")")
+                                .font(.caption)
+                                .padding(.top, 5)
+                        }
+                    }
+                }
+            } else {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+            }
+            
+            if let error = moviesViewModel.error {
+                HStack {
+                    Text("\(error.localizedDescription)")
+                }
+            }
         }
     }
 }
