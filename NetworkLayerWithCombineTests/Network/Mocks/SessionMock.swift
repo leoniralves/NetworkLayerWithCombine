@@ -7,7 +7,7 @@
 
 import XCTest
 import Combine
-@testable import ProjectNoName
+@testable import NetworkLayerWithCombine
 
 class SessionMock: APISession {
     private let stub: (file: String, statusCode: Int)?

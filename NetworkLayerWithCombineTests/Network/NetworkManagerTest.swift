@@ -7,7 +7,7 @@
 
 import XCTest
 import Combine
-@testable import ProjectNoName
+@testable import NetworkLayerWithCombine
 
 class NetworkManagerTest: XCTestCase {
     
