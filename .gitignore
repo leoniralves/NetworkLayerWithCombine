@@ -1,0 +1,14 @@
+# OSX
+.DS_Store
+
+# Xcode
+xcuserdata/
+
+# Reports
+fastlane/report.xml
+fastlane/test_output/
+fastlane/xcov_report
+
+# Build artifacts
+*.dSYM.zip
+*.ipa
